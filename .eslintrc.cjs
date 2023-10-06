@@ -3,6 +3,7 @@ module.exports = {
     extends: ['eslint:recommended'],
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
     settings: { react: { version: '18.2' } },
+    ignorePatterns: ['dist', 'node_modules'],
     plugins: [],
     rules: {
         semi: ['error', 'always'],
