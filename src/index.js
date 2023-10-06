@@ -1,1 +1,5 @@
-console.log("first");
+import { Init } from './test';
+
+console.log('first');
+
+new Init();

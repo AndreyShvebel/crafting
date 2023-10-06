@@ -1,16 +1,20 @@
 {
-  "name": "crafting",
-  "version": "1.0.0",
-  "description": "",
-  "private": true,
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
-  }
+    "name": "crafting",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+        "start": "webpack",
+        "format": "npx prettier --write ."
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+        "eslint": "^8.50.0",
+        "prettier": "^3.0.3",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
+    }
 }
