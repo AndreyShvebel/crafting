@@ -1,0 +1,22 @@
+{
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "htmltagwrap.tag": "",
+    "explorer.confirmDelete": false,
+    "editor.linkedEditing": true,
+    "workbench.startupEditor": "none",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "todo-tree.highlights.useColourScheme": true,
+    "css.format.spaceAroundSelectorSeparator": true,
+
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript, typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.configPath": ".prettierrc"
+}
