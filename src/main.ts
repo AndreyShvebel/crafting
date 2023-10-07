@@ -1,8 +1,11 @@
 import viteLogo from '/vite.svg';
 
+import typescriptLogo from 'shared/assets/typescript.svg';
+import { createDomEl } from 'shared/lib/DomCreator';
+import type { NewDomElement } from 'shared/lib/DomCreator/types.ts';
+
 import { setupCounter } from './counter.ts';
 import './style.scss';
-import typescriptLogo from './typescript.svg';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -21,5 +24,21 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </p>
   </div>
 `;
+
+const input: NewDomElement<'input'> = {
+    tag: 'input',
+    props: {
+        value: '123',
+        class: '123',
+    },
+};
+
+const newEl = createDomEl({
+    tag: 'div',
+    children: [input, input, input, input, input],
+});
+const app = document.getElementById('app');
+
+app?.appendChild(newEl);
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
