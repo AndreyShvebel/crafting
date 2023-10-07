@@ -2,15 +2,12 @@ import { CounterController } from '../model/counter.controller';
 import { CounterEvents } from '../model/counter.model';
 
 export class CounterView {
-    root: HTMLElement | null;
     label: HTMLElement;
     increaseButton: HTMLElement;
     decreaseButton: HTMLElement;
     wrapper: HTMLElement;
 
     constructor(private readonly counterController: CounterController) {
-        this.root = document.getElementById('app');
-
         this.label = document.createElement('span');
         this.label.id = 'counter';
         this.label.textContent = '0';
@@ -44,8 +41,8 @@ export class CounterView {
         });
     }
 
-    render() {
-        this.root?.appendChild(this.wrapper);
+    render(el: HTMLElement | null) {
+        el?.appendChild(this.wrapper);
     }
 
     update() {
