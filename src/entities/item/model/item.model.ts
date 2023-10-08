@@ -1,20 +1,7 @@
-import EventEmitter from 'eventemitter3';
+import { IItemModel } from './types';
 
-export enum ItemEvents {
-    drag = 'DRAG',
-    dragEnd = 'DRAG_END',
-    drop = 'DROP',
-    decrease = 'DECREASE',
-    increase = 'INCREASE',
-}
-
-interface IItemModel {
-    id: string;
-    name: string;
-    description: string;
-    img: string;
-    amount: number;
-}
+const MAX_AMOUNT = 64;
+const MIN_AMOUNT = 0;
 
 export class ItemModel {
     id: string;
@@ -23,25 +10,33 @@ export class ItemModel {
     img: string;
     amount: number;
 
-    readonly emitter = new EventEmitter();
-
     constructor({ id, name, description, img, amount }: IItemModel) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.img = img;
-        this.amount = amount;
-
-        this.initListeners();
+        this.amount = this.validateAmount(amount);
     }
 
-    initListeners() {
-        this.emitter.addListener(ItemEvents.drag, () => {
-            this.amount -= 1;
-        });
-        this.emitter.addListener(ItemEvents.dragEnd, () => {
-            this.amount += 1;
-        });
-        this.emitter.addListener(ItemEvents.drop, () => {});
+    decrementAmount() {
+        this.amount = this.validateAmount(this.amount - 1);
+    }
+
+    incrementAmount() {
+        this.amount = this.validateAmount(this.amount + 1);
+    }
+
+    setAmount(value: number) {
+        this.amount = this.validateAmount(value);
+    }
+
+    validateAmount(value: number) {
+        if (value > MAX_AMOUNT) {
+            return MAX_AMOUNT;
+        }
+        if (value < MIN_AMOUNT) {
+            return MIN_AMOUNT;
+        }
+        return value;
     }
 }

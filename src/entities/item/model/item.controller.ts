@@ -1,22 +1,13 @@
-import { ItemEvents, ItemModel } from './item.model';
+import EventEmitter from 'eventemitter3';
+
+import { ItemModel } from './item.model';
+import { ItemEvents } from './types';
 
 export class ItemController {
-    constructor(private readonly itemModel: ItemModel) {}
+    readonly events = new EventEmitter();
 
-    decreaseAmount() {
-        this.itemModel.emitter.emit(ItemEvents.decrease);
-    }
-
-    increaseAmount() {
-        this.itemModel.emitter.emit(ItemEvents.increase);
-    }
-
-    drag() {
-        this.itemModel.emitter.emit(ItemEvents.drag);
-    }
-
-    get events() {
-        return this.itemModel.emitter;
+    constructor(private readonly itemModel: ItemModel) {
+        this.initEvents();
     }
 
     get itemData() {
@@ -27,5 +18,15 @@ export class ItemController {
             img: this.itemModel.img,
             amount: this.itemModel.amount,
         };
+    }
+
+    initEvents() {
+        this.events.addListener(ItemEvents.drag, () => {
+            this.itemModel.decrementAmount();
+        });
+
+        this.events.addListener(ItemEvents.dragEnd, () => {
+            this.itemModel.incrementAmount();
+        });
     }
 }
