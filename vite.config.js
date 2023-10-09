@@ -16,6 +16,6 @@ export default defineConfig({
         port: 5000,
     },
     build: {
-        sourcemap: true,
+        sourcemap: 'inline',
     },
 });
