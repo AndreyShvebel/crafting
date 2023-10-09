@@ -4,6 +4,7 @@ export enum ItemEvents {
     drop = 'DROP',
     decrease = 'DECREASE',
     increase = 'INCREASE',
+    update = 'UPDATE',
 }
 
 export interface IItemModel {

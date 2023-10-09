@@ -1,48 +1,31 @@
-import { ItemController } from '../model/item.controller';
-import { ItemEvents } from '../model/types';
+import { InitItemViewDTO } from '../dto/init-Item-view.dto';
 
 export class ItemView {
     block: HTMLElement;
     image: HTMLElement;
     counterLabel: HTMLElement;
 
-    constructor(private readonly itemController: ItemController) {
+    constructor() {
         this.block = document.createElement('div');
         this.image = document.createElement('img');
         this.counterLabel = document.createElement('span');
 
-        this.image.setAttribute('src', this.itemController.itemData.img);
-        this.counterLabel.textContent = this.itemController.itemData.amount.toString();
         this.block.draggable = true;
 
         this.block.appendChild(this.image);
         this.block.appendChild(this.counterLabel);
-
-        this.initListeners();
     }
 
-    initListeners() {
-        this.block.addEventListener('dragstart', () => {
-            this.itemController.events.emit(ItemEvents.drag);
-        });
-        this.block.addEventListener('dragend', event => {
-            this.itemController.events.emit(ItemEvents.dragEnd);
-            console.log(event);
-        });
-
-        this.itemController.events.addListener(ItemEvents.drag, () => {
-            this.update();
-        });
-        this.itemController.events.addListener(ItemEvents.dragEnd, () => {
-            this.update();
-        });
+    init(itemData: InitItemViewDTO): void {
+        this.image.setAttribute('src', itemData.img);
+        this.counterLabel.textContent = itemData.amount.toString();
     }
 
-    update() {
-        this.counterLabel.textContent = this.itemController.itemData.amount.toString();
+    update(value: number): void {
+        this.counterLabel.textContent = value.toString();
     }
 
-    render(root: HTMLElement | null) {
+    render(root: HTMLElement | null): void {
         root?.appendChild(this.block);
     }
 }
